@@ -28,8 +28,8 @@
   height: 100%;
   background: #ff6f91;
   border-radius: 10px;
-  overflow: hidden;
-  z-index: 2;
+  overflow: hidden; /* ESCONDE A CARTA COMPLETAMENTE */
+  z-index: 3;
 }
 
 .flap {
@@ -41,14 +41,14 @@
   clip-path: polygon(0 0, 50% 50%, 100% 0);
   transform-origin: top;
   transition: transform 0.8s ease;
-  z-index: 3;
+  z-index: 4;
 }
 
 .letter {
   position: absolute;
-  bottom: 10px; /* começa dentro do envelope */
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(60%);
+  transform: translateX(-50%) translateY(100%); /* COMEÇA TOTALMENTE ESCONDIDA */
   width: 90%;
   height: 90%;
   background: white;
@@ -57,7 +57,7 @@
   box-sizing: border-box;
   text-align: center;
   transition: transform 1s ease;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ABRINDO */
@@ -66,7 +66,7 @@
 }
 
 .container.open .letter {
-  transform: translateX(-50%) translateY(-80%); /* sobe de dentro */
+  transform: translateX(-50%) translateY(-80%); /* SAI DO ENVELOPE */
 }
 
 h2 {
@@ -81,8 +81,7 @@ h2 {
   </div>  <div class="letter">
     <h2>💖 Para você</h2>
     <p>
-      Escreva aqui sua mensagem...
-      Agora a carta sai de dentro do envelope de verdade 😏
+      Agora sim, a carta começa totalmente escondida e sai de dentro certinho 😏
     </p>
   </div>
 </div><script>

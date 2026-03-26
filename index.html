@@ -59,8 +59,40 @@ body {
   box-sizing:border-box;
   text-align:center;
   opacity:0;
-  transition: all 0.6s ease;
   z-index:1;
+}
+
+/* ANIMAÇÃO DE PULO */
+@keyframes jumpOut {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity:0;
+  }
+  50% {
+    transform: translate(-50%, -180%) scale(1.1);
+    opacity:1;
+  }
+  70% {
+    transform: translate(-50%, -140%) scale(0.95);
+  }
+  100% {
+    transform: translate(-50%, -150%) scale(1);
+    opacity:1;
+  }
+}
+
+.container.open .letter {
+  animation: jumpOut 0.9s ease forwards;
+  z-index: 10; /* GARANTE que fique na frente */
+}
+
+/* IMPORTANTE: quando abrir, o envelope vai pra trás */
+.container.open .envelope {
+  z-index: 1;
+}
+
+.container.open .flap {
+  z-index: 2;
 }
 
 /* TEXTO ANIMADO */
@@ -108,14 +140,9 @@ body {
   100% {transform:translateY(-150px); opacity:0;}
 }
 
-/* ABRIR */
+/* ABRIR ENVELOPE */
 .container.open .flap {
   transform: rotateX(180deg);
-}
-
-.container.open .letter {
-  opacity:1;
-  transform:translate(-50%, -120%) scale(1);
 }
 
 /* FUNDO ESTRELADO */
@@ -139,52 +166,42 @@ body {
     <div class="flap"></div>
   </div>  <div class="letter">
     <h2>💖 Para você</h2>
-    <p class="typing">Essa carta apareceu magicamente só pra você... 😏✨</p>
+    <p class="typing">Agora a carta pula pra fora do envelope só pra você 😏✨</p>
   </div>
 </div><script>
 
-// ABRIR CARTA
 function openLetter(){
   const c = document.querySelector('.container');
   c.classList.toggle('open');
-
   createSparkles();
   createHearts();
 }
 
-// PARTÍCULAS
 function createSparkles(){
   for(let i=0;i<25;i++){
     const s = document.createElement('div');
     s.className='sparkle';
-
     s.style.left='50%';
     s.style.top='50%';
-
     s.style.setProperty('--x', (Math.random()-0.5)*200+'px');
     s.style.setProperty('--y', (Math.random()-0.5)*200+'px');
-
     document.body.appendChild(s);
     setTimeout(()=>s.remove(),1000);
   }
 }
 
-// CORAÇÕES
 function createHearts(){
   for(let i=0;i<10;i++){
     const h = document.createElement('div');
     h.className='heart';
     h.innerHTML='💖';
-
     h.style.left=(Math.random()*100)+'%';
     h.style.top='60%';
-
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),2000);
   }
 }
 
-// ESTRELAS NO FUNDO
 for(let i=0;i<80;i++){
   const star=document.createElement('div');
   star.className='star';

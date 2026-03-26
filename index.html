@@ -23,13 +23,14 @@
 
 .envelope {
   position: absolute;
-  bottom: 0;
   width: 100%;
   height: 100%;
   background: #ff6f91;
   border-radius: 10px;
-  overflow: hidden; /* ESCONDE A CARTA COMPLETAMENTE */
-  z-index: 3;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flap {
@@ -41,14 +42,15 @@
   clip-path: polygon(0 0, 50% 50%, 100% 0);
   transform-origin: top;
   transition: transform 0.8s ease;
-  z-index: 4;
+  z-index: 3;
 }
 
+/* CARTA COMEÇA INVISÍVEL */
 .letter {
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(100%); /* COMEÇA TOTALMENTE ESCONDIDA */
+  transform: translate(-50%, -50%) scale(0.5);
   width: 90%;
   height: 90%;
   background: white;
@@ -56,17 +58,19 @@
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
-  transition: transform 1s ease;
-  z-index: 2;
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 1;
 }
 
-/* ABRINDO */
+/* AO ABRIR */
 .container.open .flap {
   transform: rotateX(180deg);
 }
 
 .container.open .letter {
-  transform: translateX(-50%) translateY(-80%); /* SAI DO ENVELOPE */
+  opacity: 1;
+  transform: translate(-50%, -120%) scale(1);
 }
 
 h2 {
@@ -81,7 +85,7 @@ h2 {
   </div>  <div class="letter">
     <h2>💖 Para você</h2>
     <p>
-      Agora sim, a carta começa totalmente escondida e sai de dentro certinho 😏
+      Agora a carta só aparece quando você abre o envelope 😏
     </p>
   </div>
 </div><script>
